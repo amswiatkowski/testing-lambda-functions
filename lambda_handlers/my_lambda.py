@@ -1,4 +1,3 @@
-import json
 from typing import Dict, Any, Final
 from aws_lambda_typing import events
 from aws_lambda_typing.context import Context
@@ -23,6 +22,9 @@ def handler(event: events.APIGatewayProxyEventV1, context: Context) -> Dict[str,
 
 
 def _prepare_response(request: Dict[str, Any], context: Context) -> Dict[str, Any]:
+    ssm_parameter = context.parameters['DummySSM']
+    if ssm_parameter is None:
+        raise Exception
     response = {
         "statusCode": 400,
         "headers": {
@@ -31,9 +33,6 @@ def _prepare_response(request: Dict[str, Any], context: Context) -> Dict[str, An
         "body": "Bad request"
     }
     if request.get('user_id') is not None and len(request.get('user_id')) > 3:
-        ssm_parameter = context.parameters['DummySSM']
-        if ssm_parameter is None:
-            raise Exception
         response = {
             "statusCode": 200,
             "headers": {

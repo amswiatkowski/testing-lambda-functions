@@ -6,6 +6,7 @@ import lambda_decorators
 import pytest
 from aws_lambda_typing.context import Context
 
+from lambda_handlers.my_lambda import _prepare_response
 from tests.unit.mocks.mock_ssm_parameter_store_decorator import mock_ssm_parameter_store_decorator
 
 LAMBDA_EVENT = {
@@ -123,6 +124,39 @@ LAMBDA_EVENT = {
 }
 LAMBDA_CONTEXT: Final[Context] = Context()
 
+# Testing _prepare_response() function
+def test_valid_prepare_response():
+    context = LAMBDA_CONTEXT
+    context.parameters = {'DummySSM': 'My Fake SSM Value'}
+    request = {'user_id': '123-123-123'}
+    # Check _prepare_response() when there's a valid request
+    response = _prepare_response(request, context)
+    # Lambda should return 200 Status
+    logging.getLogger().info('Response body: ' + response['body'])
+    assert response['statusCode'] == 200
+
+
+def test_invalid_prepare_response():
+    context = LAMBDA_CONTEXT
+    context.parameters = {'DummySSM': 'My Fake SSM Value'}
+    request = {'user_id': '123'}
+    # Check _prepare_response() when there's a valid request
+    response = _prepare_response(request, context)
+    # Lambda should return 200 Status
+    logging.getLogger().info('Response body: ' + response['body'])
+    assert response['statusCode'] == 400
+
+
+def test_without_ssm_prepare_response():
+    with pytest.raises(Exception):
+        context = LAMBDA_CONTEXT
+        context.parameters = {}
+        request = {'user_id': '123'}
+        # Check _prepare_response() when there's a valid request
+        response = _prepare_response(request, context)
+        # Lambda should raise an Exception
+
+# Testing Lambda's handler
 
 def get_redecorated_handler():
     pytest.MonkeyPatch().setattr(lambda_decorators, 'ssm_parameter_store', mock_ssm_parameter_store_decorator)
@@ -132,7 +166,7 @@ def get_redecorated_handler():
     return handler_module.handler
 
 
-def test_valid_my_lambda():
+def test_valid_my_lambda_handler():
     redecorated_handler = get_redecorated_handler()
     # Check Lambda behaviour when there's a valid LAMBDA_EVENT
     response = redecorated_handler(LAMBDA_EVENT, LAMBDA_CONTEXT)
@@ -141,7 +175,7 @@ def test_valid_my_lambda():
     assert response['statusCode'] == 200
 
 
-def test_empty_my_lambda():
+def test_empty_my_lambda_handler():
     redecorated_handler = get_redecorated_handler()
     # Check Lambda behaviour when there's no LAMBDA_EVENT at all
     response = redecorated_handler({}, LAMBDA_CONTEXT)
@@ -150,10 +184,9 @@ def test_empty_my_lambda():
     assert response['statusCode'] == 500
 
 
-def test_invalid_my_lambda():
+def test_invalid_my_lambda_handler():
     redecorated_handler = get_redecorated_handler()
-    # Check Lambda behaviour when there's LAMBDA_EVENT with not-proper user_id, which should exist and have greater
-    # length than 3
+    # Check Lambda behaviour when there's LAMBDA_EVENT with not-proper user_id
     LAMBDA_EVENT['pathParameters'] = {'user_id': '123'}
     response = redecorated_handler(LAMBDA_EVENT, LAMBDA_CONTEXT)
     # Lambda should return 400 Status as request's content has not proper value
