@@ -1,0 +1,5 @@
+-i https://pypi.org/simple
+aws-lambda-typing==2.16.4
+typing-extensions==4.5.0 ; python_version >= '3.7'
+lambda-decorators==0.6.0
+

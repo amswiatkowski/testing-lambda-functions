@@ -3,9 +3,16 @@
 
 This is a simple project showing how to test Lambda functions with different approaches.
 
-Before you start you need AWS CDK and pipenv installed:
+## Architecture
+<img src="diagram/testing_lambda_functions_diagram.png" alt="Lambda testing architecture diagram">
+<br>
+
+## Before you start
+
+Before you start you need Docker, AWS CDK and pipenv installed:
 
 ```shell
+
 npm install -g aws-cdk
 pip install pipenv
 ```

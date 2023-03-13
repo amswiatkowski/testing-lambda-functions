@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aws-cdk-lib = "==2.68.0"
 constructs = "<11.0.0,>=10.0.0"
 aws-lambda-typing = "*"
-pytest = "*"
 "aws-cdk.aws-lambda-python-alpha" = "*"
+lambda-decorators = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.9"
