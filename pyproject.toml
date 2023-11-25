@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "testing-lambda-functions"
+version = "0.1.0"
+description = "This is a simple project showing how to test Lambda functions with different approaches."
+authors = ["sz3jdii <adam.swiatkowski@iodi.pl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+# 3rdparties
+boto3 = "^1.26.163"
+botocore = "^1.31.18"
+aws-lambda-context = "*"
+pydantic = "*"
+aws-lambda-powertools =  {extras = ["all"],version = "*"}
+requests = "*"
+cachetools = "*"
+boto3-stubs = { version = "*", extras = ["cloudformation", "lambda"] }
+aws-lambda-typing = "*"
+lambda-decorators = "*"
+
+
+[tool.poetry.group.dev.dependencies]
+# Internal
+testing-lambda-functions-cdk = {path = "cdk", develop = true}
+
+# 3rdparties
+pytest = "*"
+pytest-mock = "*"
+pytest-dotenv = "*"
+pycodestyle = "*"
+python-dotenv = "*"
+GitPython = "*"
+yapf = "*"
+flake8 = "*"
+isort = "*"
+"aws-cdk.aws-lambda-python-alpha" = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

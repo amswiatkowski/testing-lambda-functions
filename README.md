@@ -1,37 +1,50 @@
 
 # Testing Lambda functions
+<img src="diagram/testing_lambda_functions_diagram.png" alt="Lambda testing architecture diagram">
+<br><br>
+<br><br>
+<br><br>
 
+## Description
 This is a simple project showing how to test Lambda functions with different approaches.
 
-## Architecture
-<img src="diagram/testing_lambda_functions_diagram.png" alt="Lambda testing architecture diagram">
-<br>
+## Prerequisite
+ * Docker
+ * AWS CDK CLI
+ * AWS CLI
+ * node.js
+ * Python 3.10
+ * Poetry
 
-## Before you start
+## Quick start
+1. Clone the repo
+   ```sh
+   git clone https://github.com/sz3jdii/testing-lambda-functions.git
+   ```
+2. Install dependencies
+    ```sh
+    poetry install
+    ```
+3. Deploy the project
+   ```sh
+   ./deploy.sh
+   ```
 
-Before you start you need Docker, AWS CDK and pipenv installed:
+## Useful commands
+ * `./lint.sh`          Fixes indents and checks your code quality
+ * `./destroy.sh`       Triggers cdk destroy
+ * `./deploy/sh`        Deploys stack to the AWS account
+ * `pytest -vv ./tests` Run tests
 
-```shell
+## Useful links
+* [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/cli.html)
 
-npm install -g aws-cdk
-pip install pipenv
-```
+## Author
+**Adam Świątkowski**
+* [github/sz3jdii](https://github.com/sz3jdii)
+* [Blog](https://cloudybarz.com/)
 
-Next clone the project and install the requirements:
+### License
+Copyright © 2023, [Adam Świątkowski](https://github.com/sz3jdii).
+Released under the [MIT License](LICENSE).
 
-```shell
-pipenv install --dev
-```
-
-Login to your AWS account and deploy the stack from this project:
-```shell
-aws configure sso
-export AWS_PROFILE=NAME_OF_YOUR_PROFILE
-cdk bootstrap
-./deploy.sh
-```
-# Running unit tests
-```shell
-pytest -vv ./unit
-```
-Enjoy!

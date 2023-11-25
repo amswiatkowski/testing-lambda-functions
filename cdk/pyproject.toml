@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "testing-lambda-functions-cdk"
+version = "0.1.0"
+description = "This is a simple project showing how to test Lambda functions with different approaches."
+authors = ["sz3jdii <adam.swiatkowski@iodi.pl>"]
+packages = [{ include = "testing_lambda_functions" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+# 3rdparties
+aws-cdk-lib = "^2.87.0"
+constructs = "10.0.*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

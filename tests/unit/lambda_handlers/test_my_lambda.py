@@ -1,13 +1,16 @@
 import importlib.util
 import logging
 from typing import Final
+from unittest.mock import MagicMock
 
 import lambda_decorators
 import pytest
 from aws_lambda_typing.context import Context
+from pytest_mock import MockerFixture
 
 from lambda_handlers.my_lambda import _prepare_response
-from tests.unit.mocks.mock_ssm_parameter_store_decorator import mock_ssm_parameter_store_decorator
+from tests.unit.mocks.mock_ssm_parameter_store_decorator import \
+    mock_ssm_parameter_store_decorator
 
 LAMBDA_EVENT = {
     "body": None,
@@ -124,10 +127,18 @@ LAMBDA_EVENT = {
 }
 LAMBDA_CONTEXT: Final[Context] = Context()
 
+
+@pytest.fixture(scope='function', name='global_boto_client_mock', autouse=True)
+def _global_boto_client_mock(mocker: MockerFixture) -> MagicMock:
+    boto_client_mock: MagicMock = mocker.patch('boto3.client')
+    boto_client_mock.return_value.list_layers.return_value = {'Layers': ['Layer1', 'Layer2']}
+    return boto_client_mock
+
+
 # Testing _prepare_response() function
 def test_valid_prepare_response():
     context = LAMBDA_CONTEXT
-    context.parameters = {'DummySSM': 'My Fake SSM Value'}
+    context.parameters = {'RealSSM': 'My Fake SSM Value'}
     request = {'user_id': '123-123-123'}
     # Check _prepare_response() when there's a valid request
     response = _prepare_response(request, context)
@@ -138,7 +149,7 @@ def test_valid_prepare_response():
 
 def test_invalid_prepare_response():
     context = LAMBDA_CONTEXT
-    context.parameters = {'DummySSM': 'My Fake SSM Value'}
+    context.parameters = {'RealSSM': 'My Fake SSM Value'}
     request = {'user_id': '123'}
     # Check _prepare_response() when there's a valid request
     response = _prepare_response(request, context)
@@ -153,8 +164,9 @@ def test_without_ssm_prepare_response():
         context.parameters = {}
         request = {'user_id': '123'}
         # Check _prepare_response() when there's a valid request
-        response = _prepare_response(request, context)
+        _prepare_response(request, context)
         # Lambda should raise an Exception
+
 
 # Testing Lambda's handler
 
