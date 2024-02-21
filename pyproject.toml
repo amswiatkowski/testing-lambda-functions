@@ -6,11 +6,11 @@ authors = ["sz3jdii <adam.swiatkowski@iodi.pl>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 
 # 3rdparties
-boto3 = "^1.26.163"
-botocore = "^1.31.18"
+boto3 = "^1.28.62"
+botocore = "^1.28.62"
 aws-lambda-context = "*"
 pydantic = "*"
 aws-lambda-powertools =  {extras = ["all"],version = "*"}
@@ -19,7 +19,6 @@ cachetools = "*"
 boto3-stubs = { version = "*", extras = ["cloudformation", "lambda"] }
 aws-lambda-typing = "*"
 lambda-decorators = "*"
-
 
 [tool.poetry.group.dev.dependencies]
 # Internal
