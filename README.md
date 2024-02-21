@@ -2,8 +2,6 @@
 # Testing Lambda functions
 <img src="diagram/testing_lambda_functions_diagram.png" alt="Lambda testing architecture diagram">
 <br><br>
-<br><br>
-<br><br>
 
 ## Description
 This is a simple project showing how to test Lambda functions with different approaches.
@@ -13,7 +11,7 @@ This is a simple project showing how to test Lambda functions with different app
  * AWS CDK CLI
  * AWS CLI
  * node.js
- * Python 3.10
+ * Python 3.12
  * Poetry
 
 ## Quick start

@@ -67,7 +67,7 @@ class TestingLambdaFunctionsStack(Stack):
             self,
             'HelloHandler',
             runtime=LAMBDA_RUNTIME,
-            architecture=LAMBDA_ARCHITECTURE,
+            architecture=aws_lambda.Architecture.ARM_64,
             code=aws_lambda.Code.from_asset(BUILD_FOLDER),
             handler='lambda_handlers.my_lambda.handler',
             environment={
@@ -85,6 +85,7 @@ class TestingLambdaFunctionsStack(Stack):
             log_format=aws_lambda.LogFormat.JSON.value,
             system_log_level=aws_lambda.SystemLogLevel.INFO.value,
         )
+        aws_lambda.Alias(self, id='HelloHandlerAlias', alias_name='hello-handler', version=lambda_function.current_version)
         return lambda_function
 
     def _build_apigw(self) -> aws_apigateway.RestApi:
