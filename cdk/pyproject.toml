@@ -6,11 +6,11 @@ authors = ["sz3jdii <adam.swiatkowski@iodi.pl>"]
 packages = [{ include = "testing_lambda_functions" }]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 
 # 3rdparties
-aws-cdk-lib = "^2.87.0"
-constructs = "10.0.*"
+aws-cdk-lib = ">=2.0.0"
+constructs = ">=10.0.0"
 
 
 [build-system]
