@@ -17,7 +17,7 @@ This is a simple project showing how to test Lambda functions with different app
 ## Quick start
 1. Clone the repo
    ```sh
-   git clone https://github.com/sz3jdii/testing-lambda-functions.git
+   git clone https://github.com/amswiatkowski/testing-lambda-functions.git
    ```
 2. Install dependencies
     ```sh
@@ -39,10 +39,10 @@ This is a simple project showing how to test Lambda functions with different app
 
 ## Author
 **Adam Świątkowski**
-* [github/sz3jdii](https://github.com/sz3jdii)
+* [github/amswiatkowski](https://github.com/amswiatkowski)
 * [Blog](https://cloudybarz.com/)
 
 ### License
-Copyright © 2023, [Adam Świątkowski](https://github.com/sz3jdii).
+Copyright © 2023, [Adam Świątkowski](https://github.com/amswiatkowski).
 Released under the [MIT License](LICENSE).
 
