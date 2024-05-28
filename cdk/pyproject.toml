@@ -2,7 +2,7 @@
 name = "testing-lambda-functions-cdk"
 version = "0.1.0"
 description = "This is a simple project showing how to test Lambda functions with different approaches."
-authors = ["sz3jdii <adam.swiatkowski@iodi.pl>"]
+authors = ["amswiatkowski <adam.swiatkowski@iodi.pl>"]
 packages = [{ include = "testing_lambda_functions" }]
 
 [tool.poetry.dependencies]
